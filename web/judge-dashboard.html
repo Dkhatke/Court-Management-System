@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Judge Dashboard | Court Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<!-- Navbar -->
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <span class="navbar-brand fw-bold">Judge Dashboard ⚖️</span>
+    <a href="login.html" class="btn btn-light btn-sm"><i class="bi bi-box-arrow-right"></i> Logout</a>
+  </div>
+</nav>
+
+<!-- Content -->
+<div class="container mt-4">
+
+  <!-- Cases -->
+  <div class="card p-3 shadow-sm">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4>Cases</h4>
+      <input type="text" id="caseSearch" class="form-control w-25" placeholder="Search case...">
+    </div>
+    <table class="table table-hover table-bordered text-center">
+      <thead class="table-dark text-white">
+        <tr>
+          <th>Case ID</th><th>Title</th><th>Court</th><th>Judge</th><th>Filing Date</th>
+        </tr>
+      </thead>
+      <tbody id="caseTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Hearings -->
+  <div class="card p-3 shadow-sm mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4>Hearings</h4>
+      <input type="text" id="hearingSearch" class="form-control w-25" placeholder="Search hearing...">
+    </div>
+    <table class="table table-hover table-bordered text-center">
+      <thead class="table-dark text-white">
+        <tr>
+          <th>Hearing ID</th><th>Case ID</th><th>Date</th><th>Next Date</th><th>Report</th>
+        </tr>
+      </thead>
+      <tbody id="hearingTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Judgements -->
+  <div class="card p-3 shadow-sm mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4>Judgements</h4>
+      <input type="text" id="judgementSearch" class="form-control w-25" placeholder="Search judgement...">
+    </div>
+    <table class="table table-hover table-bordered text-center">
+      <thead class="table-dark text-white">
+        <tr>
+          <th>Judgement ID</th><th>Case ID</th><th>Date</th><th>Verdict</th>
+        </tr>
+      </thead>
+      <tbody id="judgementTableBody"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script src="js/judge.js"></script>
+</body>
+</html>
