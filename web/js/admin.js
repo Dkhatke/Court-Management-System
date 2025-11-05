@@ -60,22 +60,45 @@ async function loadTable(endpoint, tbodyId, query = "") {
       let row = "<tr>";
       const cols = Object.values(obj);
 
-      cols.forEach(c => {
-        // Format dates for display (ISO date strings)
-        if (typeof c === 'string' && c.match(/^\d{4}-\d{2}-\d{2}/)) {
-          const date = new Date(c);
-          if (!isNaN(date)) {
-            row += `<td>${date.toLocaleDateString()}</td>`;
-            return;
+      // Special handling for hearings table to ensure proper column alignment
+      if (endpoint === 'hearings') {
+        // We know the exact column order for hearings
+        const [caseId, hearingId, date, nextDate, report] = cols;
+        
+        // Format dates
+        const formatDate = (dateStr) => {
+          if (dateStr && typeof dateStr === 'string' && dateStr.match(/^\d{4}-\d{2}-\d{2}/)) {
+            const date = new Date(dateStr);
+            return !isNaN(date) ? date.toLocaleDateString() : "—";
           }
-        }
-        row += `<td>${c ?? "—"}</td>`;
-      });
+          return dateStr ?? "—";
+        };
+        
+        // Add each column with fixed width to prevent shifting
+        row += `<td style="width: 15%">${caseId ?? "—"}</td>`;
+        row += `<td style="width: 15%">${hearingId ?? "—"}</td>`;
+        row += `<td style="width: 15%">${formatDate(date)}</td>`;
+        row += `<td style="width: 15%">${formatDate(nextDate)}</td>`;
+        row += `<td style="width: 30%">${report ?? "—"}</td>`;
+      } else {
+        // Regular handling for other tables
+        cols.forEach(c => {
+          if (typeof c === 'string' && c.match(/^\d{4}-\d{2}-\d{2}/)) {
+            const date = new Date(c);
+            if (!isNaN(date)) {
+              row += `<td>${date.toLocaleDateString()}</td>`;
+              return;
+            }
+          }
+          row += `<td>${c ?? "—"}</td>`;
+        });
+      }
 
       // Use first column value as identifier for edit/delete callbacks
       const idVal = cols[0];
+      // Always ensure action buttons are in their own column
       row += `
-        <td>
+        <td style="width: 100px">
           <button class="btn btn-warning btn-sm me-1" onclick="editRecord('${endpoint}', ${idVal})">
             <i class="bi bi-pencil-square"></i>
           </button>

@@ -15,6 +15,18 @@
     .table th, .table td {
       vertical-align: middle;
       text-align: center;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    #hearings .table td {
+      width: auto !important;
+      table-layout: fixed;
+    }
+    #hearings .table td:nth-child(5) {
+      width: 30% !important;
+    }
+    #hearings .table td:last-child {
+      width: 10% !important;
     }
     .search-box {
       max-width: 350px;
@@ -134,9 +146,16 @@
           <button class="btn btn-success" onclick="showAddModal('hearing')"><i class="bi bi-plus-circle"></i> Add Hearing</button>
           <input type="text" class="form-control search-box" id="hearingSearch" placeholder="Search Hearing...">
         </div>
-        <table class="table table-hover table-bordered">
+        <table class="table table-hover table-bordered" style="table-layout: fixed;">
           <thead class="table-primary">
-            <tr><th>Case ID</th><th>Hearing ID</th><th>Date</th><th>Next Date</th><th>Report</th><th>Action</th></tr>
+            <tr>
+              <th style="width: 15%">Case ID</th>
+              <th style="width: 15%">Hearing ID</th>
+              <th style="width: 15%">Date</th>
+              <th style="width: 15%">Next Date</th>
+              <th style="width: 30%">Report</th>
+              <th style="width: 10%">Action</th>
+            </tr>
           </thead>
           <tbody id="hearingTableBody"></tbody>
         </table>
