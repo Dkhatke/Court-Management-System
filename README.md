@@ -1,127 +1,219 @@
-## Court Management System
 
-This repository contains a simple Court Management System demo implemented with Java servlets and a small embedded Jetty server for local development. The project serves a static frontend from the `web/` folder and exposes several servlet endpoints (for courts, judges, lawyers, clients, cases, hearings, and judgements).
+ Court Management System
 
----
+A Court Management System built using Java Servlets and an embedded Jetty server to manage court-related information such as courts, judges, lawyers, clients, cases, hearings, and judgements.
 
-## Project layout
+The system provides a simple web-based dashboard that allows administrators to manage and search legal records efficiently.
 
-- `src/` - Java source files
-  - `servlet/` - servlet classes and `JettyServer.java`
-  - `model/` - domain models
-  - `dao/` - database/connection helpers
-- `lib/` - third-party JARs required at runtime and compile time (Jetty, Gson, JDBC driver, etc.)
-- `web/` - static frontend files (HTML/CSS/JS)
-- `build/` - compiled Java classes (created by javac)
 
 ---
 
-## Requirements
+🚀 Features
 
-- Java 17+ / Java SE 25 LTS (the project was compiled with JavaSE-25 in this workspace)
-- A JDBC driver and any additional libraries inside `lib/` (Jetty, Gson, etc.)
+📁 Manage Courts
 
-Note: The project is intentionally simple and uses an embedded Jetty server for local development rather than a full Tomcat setup.
+👩‍⚖️ Manage Judges
+
+👨‍💼 Manage Lawyers
+
+👥 Manage Clients
+
+📄 Manage Cases
+
+📅 Manage Hearings
+
+🧾 Manage Judgements
+
+🔍 Search functionality in the admin dashboard
+
+🌐 REST-style API endpoints returning JSON data
+
+⚡ Lightweight embedded Jetty server
+
+
 
 ---
 
-## Quick start (Windows - cmd.exe)
+🛠 Tech Stack
 
-1. Open a command prompt in the project root (where this README is).
+Backend
 
-2. Create the `build` directory and compile the sources:
+Java (Servlets)
 
-```cmd
-mkdir build 2>nul
+Jetty Embedded Server
+
+JDBC
+
+Gson (JSON parsing)
+
+
+Frontend
+
+HTML
+
+CSS
+
+JavaScript
+
+
+Database
+
+JDBC-based database connectivity
+
+
+
+---
+
+📂 Project Structure
+
+Court-Management-System
+│
+├── src/
+│   ├── servlet/        # Servlets and Jetty server
+│   ├── model/          # Domain models (Judge, Lawyer, Case etc.)
+│   └── dao/            # Database access logic
+│
+├── web/                # Static frontend (HTML, CSS, JS)
+│
+├── lib/                # Third-party libraries (Jetty, Gson, JDBC)
+│
+├── build/              # Compiled Java classes
+│
+└── README.md
+
+
+---
+
+⚙️ Requirements
+
+Java 17+
+
+Required JAR files in lib/
+
+Jetty
+
+Gson
+
+JDBC Driver
+
+
+
+
+---
+
+▶️ Running the Project
+
+1️⃣ Clone the repository
+
+git clone https://github.com/Dkhatke/Court-Management-System.git
+cd Court-Management-System
+
+
+---
+
+2️⃣ Compile the project
+
+mkdir build
 javac -cp "lib/*" -d build src/servlet/*.java src/model/*.java src/dao/*.java
-```
 
-3. Run the embedded Jetty server (classpath must include `build` and all jars in `lib`):
 
-```cmd
+---
+
+3️⃣ Run the server
+
 java -cp "build;lib/*" servlet.JettyServer
-```
 
-After startup you should see a message indicating the server URL (for example: http://localhost:8081/).
-
-If your console shows "Server running at" followed by a URL, open that URL in your browser.
 
 ---
 
-## Default endpoints
+4️⃣ Open in browser
 
-- Static frontend served from `/` (the `web/` folder)
-- REST-style endpoints (servlets):
-  - `/courts`
-  - `/judges`
-  - `/lawyers`
-  - `/clients`
-  - `/cases`
-  - `/hearings`
-  - `/judgements`
+http://localhost:8081
 
-These endpoints return JSON arrays used by the frontend JavaScript to populate tables.
 
 ---
 
-## Notes about recent changes and important files
+🔗 API Endpoints
 
-- `src/servlet/JettyServer.java` — small embedded server runner. The server port was changed to `8081` in this workspace to avoid conflicts. To change it, edit the `new Server(PORT)` line and recompile.
-- `web/js/admin.js` — frontend admin script that handles data loading and search. There is a backup file `web/js/admin.js.bak` in the same folder if you need to restore a prior version.
+The following endpoints return JSON data used by the frontend.
 
-If you accidentally replaced a working `admin.js`, restore it with (from the `web/js` folder):
+Endpoint	Description
 
-```cmd
-cd web\js
-copy /Y admin.js.bak admin.js
-```
+/courts	List of courts
+/judges	List of judges
+/lawyers	List of lawyers
+/clients	List of clients
+/cases	List of cases
+/hearings	List of hearings
+/judgements	List of judgements
 
----
 
-## Troubleshooting
+Example:
 
-- "Could not find or load main class servlet.JettyServer"
-  - Make sure you compiled the sources into `build/` and run with `-cp "build;lib/*"`.
-  - Example:
-    ```cmd
-    javac -cp "lib/*" -d build src/servlet/*.java src/model/*.java src/dao/*.java
-    java -cp "build;lib/*" servlet.JettyServer
-    ```
+http://localhost:8081/judges
 
-- "Address already in use" / BindException
-  - Another process is listening on the configured port (the default in this workspace was changed to `8081`). Either stop that process or change the port in `src/servlet/JettyServer.java` and recompile.
-  - On Windows you can list processes using a port with:
-    ```cmd
-    netstat -ano | findstr :8080
-    tasklist /FI "PID eq <pid>"
-    ```
-
-- Classpath issues / NoClassDefFoundError
-  - Ensure `lib/*` contains the required libraries (Jetty jars, Gson, JDBC driver). The runtime classpath must include `build` and `lib/*`.
 
 ---
 
-## Development tips
+🧪 Testing the System
 
-- If you change Java sources re-run the `javac` command above to recompile into `build/` before running the server.
-- Keep third-party jars in `lib/`. If you add new libraries, include them in the `lib/` folder and restart the server with the same `-cp` pattern.
+1. Start the server.
+
+
+2. Open the Admin Dashboard in your browser.
+
+
+3. Verify:
+
+Tables load correctly
+
+Search functionality works
+
+API endpoints return JSON data.
+
+
+
+
 
 ---
 
-## Tests / Validation
+⚠️ Troubleshooting
 
-- After starting the server visit the UI in a browser and confirm tables load and that search works in the admin dashboard.
-- For quick verification, try the endpoints directly in the browser (e.g., `http://localhost:8081/judges`) to confirm JSON responses.
+Error: Could not find or load main class
 
----
+Recompile and ensure classpath includes build and lib/*.
 
-## Contact / Next steps
+javac -cp "lib/*" -d build src/servlet/*.java src/model/*.java src/dao/*.java
 
-If you want, I can:
-- Add a small Gradle or Maven build file to manage compilation and dependencies.
-- Add a simple unit/integration test harness.
-- Re-introduce the improved admin.js with optional feature flags, or provide a smaller patch that only fixes the previously broken search.
 
 ---
 
-License: MIT (adjust as appropriate)
+Error: Address already in use
+
+Change the port inside:
+
+src/servlet/JettyServer.java
+
+Example:
+
+Server server = new Server(8081);
+
+
+---
+
+📌 Future Improvements
+
+Add authentication and role-based access
+
+Integrate MySQL / PostgreSQL
+
+Implement case tracking dashboard
+
+Add Gradle or Maven build system
+
+Improve UI/UX
+
+
+
+
+That will make recruiters much more likely to click your project.
